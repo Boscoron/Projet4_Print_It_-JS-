@@ -19,27 +19,46 @@ const slides = [
 
 document.addEventListener("DOMContentLoaded", () => {
 
-	const slide = ["slide1.jpg", "slide2.jpg", "slide3.jpg", "slide4.png"];
 	let btnSuivant = document.getElementById('suiv');
 	let btnPrecedent = document.getElementById('prec');
 	let num = 0
+	let dots = Array.from(document.querySelectorAll('.dot'))
+	const tagLine = document.getElementById('tagLine')
 
     btnSuivant.addEventListener('click', () => {
 		num = num + 1;
-		if (num > slide.length -1)
+		if (num > slides.length -1)
 			num = 0;
 		if (num < 0)
-			num = slide.length -1;
-        document.getElementById("slide").src = "./assets/images/slideshow/" + slide[num];
+			num = slides.length -1;
+        document.getElementById("slide").src = "./assets/images/slideshow/" + slides[num].image;
+		tagLine.innerHTML = slides[num].tagLine
+		dots.forEach(element => {
+			let dataId = element.dataset.id
+		if (parseInt(dataId) === num){
+			element.classList.add('dot_selected')
+		} else {
+			element.classList.remove('dot_selected')
+		}
+		});
 	});
 
 	btnPrecedent.addEventListener('click', () => {
 		num = num - 1;
-		if (num > slide.length -1)
+		if (num > slides.length -1)
 			num = 0;
 		if (num < 0)
-			num = slide.length -1;
-        document.getElementById("slide").src = "./assets/images/slideshow/" + slide[num];
+			num = slides.length -1;
+        document.getElementById("slide").src = "./assets/images/slideshow/" + slides[num].image;
+		tagLine.innerHTML = slides[num].tagLine
+		dots.forEach(element => {
+			let dataId = element.dataset.id
+		if (parseInt(dataId) === num){
+			element.classList.add('dot_selected')
+		} else {
+			element.classList.remove('dot_selected')
+		}
+		});
 	});
 
 
